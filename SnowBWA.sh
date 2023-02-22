@@ -1,63 +1,58 @@
-#!/bin/bash
+#!/bin/bash -l
 
-#SBATCH --partition=main          # Partition (job queue)
+#SBATCH --job-name=SnowBWA
 
-#SBATCH --job-name=SnowBWA       # Assign an short name to your job
+#SBATCH --time=00:00:00
+#SBATCH --cpus-per-task=8
+#SBATCH --exclusive=user
 
-#SBATCH --nodes=1                 # Number of nodes you require
-#SBATCH --ntasks=1                # Total # of tasks across all nodes
-#SBATCH --cpus-per-task=4         # Cores per task (>1 if multithread tasks)
-#SBATCH --mem=200000                # Real memory (RAM) required (MB)
-#SBATCH --time=48:00:00           # Total run time limit (HH:MM:SS)
+#SBATCH --output=./SlurmOutput/SnowBWA.%j.out  # STDOUT output file
+#SBATCH --error=./SlurmOutput/SnowBWA.%j.err   # STDERR output file
 
-#SBATCH --output=slurm.%N.%j.out  # STDOUT output file
-#SBATCH --error=slurm.%N.%j.err   # STDERR output file (optional)
+#Load Modules
+enable_lmod
 
-cd /home/rps109/mtDNA/
-touch FastqList
+module load samtools/1.12
+module load bwa/0.7.17
 
+#Documentation of version
+samtools --version
+bwa mem --version
 
-for fastqname in *.fq
+#Index reference for BWA
+cd /scratch/rsnow/Sfa
+bwa index /home/rsnow/mtDNARef/Sfa_mtDNA_Ref.fasta
+samtools faidx /home/rsnow/mtDNARef/Sfa_mtDNA_Ref.fasta
+touch Bas_FastqList.txt
+
+#Creation of a list of the sample fastq to be used for while-loop
+cd /scratch/rsnow/mtDNA
+
+for fastqname in Sfa-*.fq
 do
-	echo "$fastqname" >> FastqList.txt
+	echo "$fastqname" >> Bas_FastqList.txt
 done
 
-mv FastqList.txt /scratch/rps109/BWA/FastqList.txt
-
-
-cd /scratch/rps109/BWA
-
-module purge
-module load intel/19.0.3 
-module use /projects/community/modulefiles/
-module load singularity/3.1.0
-module load BWA/bwa-0.7.17-yc759.lua
-module load samtools/1.8-gc563.lua
-
-
-bwa index /home/rps109/mtDNA/Sfa_mtDNA_Ref.fasta
-samtools faidx /home/rps109/mtDNA/Sfa_mtDNA_Ref.fasta
-touch bam.list
-
-
-cat FastqList.txt | while read name
+#Running BWA on all files. Individual sample file vs Reference
+cat Bas_FastqList.txt | while read name
 do
-	bwa mem /home/rps109/mtDNA/Sfa_mtDNA_Ref.fasta /home/rps109/mtDNA/"$name" > "$name".sam
+	bwa mem /home/rsnow/mtDNARef/Sfa_mtDNA_Ref.fasta /scratch/rsnow/mtDNA/"$name" > "$name".sam
 
-	samtools view -bt /home/rps109/mtDNA/Sfa_mtDNA_Ref.fasta "$name".sam > "$name".bam
-	samtools fixmate -O bam "$name".bam "$name".fixmate.bam 
+	samtools view -bt /home/rsnow/mtDNARef/Sfa_mtDNA_Ref.fasta "$name".sam > "$name".bam
+	samtools fixmate -O bam "$name".bam "$name".fixmate.bam
 
 	samtools sort -O bam -T "$name".sorted -o "$name".sorted.bam "$name".fixmate.bam
 
-	echo "$name".sorted.bam >> bam.list
-	samtools flagstat "$name".sorted.bam 
+	samtools flagstat "$name".sorted.bam
 done
 
+#Merge files to respresent a community
+samtools merge -f Sfa_Bas.merged.bam Sfa*.sorted.bam
+samtools merge -f Sfa_CBas.merged.bam Sfa-CBas*.sorted.bam
+samtools merge -f Sfa_ABas.merged.bam Sfa-ABas*.sorted.bam
 
-samtools merge Sfa.merged.bam *.sorted.bam
+samtools index -b Sfa_Bas.merged.bam
 
-samtools index -b Sfa.merged.bam
+
 
 exit
-
-
