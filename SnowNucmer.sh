@@ -29,7 +29,7 @@ do
 #	/cm/shared/apps/mummer/3.23/mummerplot --prefix="$mfafile" --coverage --SNP "$mfafile".delta
 #mummerplot commented out due to error in running
 
-	/cm/shared/apps/mummer/3.23/show-coords -c "$mfafile".delta > "$mfafile".stdout
+	/cm/shared/apps/mummer/3.23/show-coords -c -l -r -T "$mfafile".delta > "$mfafile".stdout
 
 	/cm/shared/apps/mummer/3.23/show-snps -HlrT "$mfafile".delta > "$mfafile".snps
 
