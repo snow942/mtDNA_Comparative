@@ -1,9 +1,10 @@
 #Ryan Snow
 #mtDNA_Comparative_Analysis
+#ATP6
 
 library (dplyr)
 library (devtools)
-#library (magrittr)
+library (genbankr)
 library (GenomicRanges)
 #library (knitr)
 #library (ggplot2)
@@ -16,10 +17,13 @@ library (rmarkdown)
 #Multiple sequence alignment completed via Nucmer, using the MUMmer package/software
 
 #Read file(s)
-Sfa_ABas.snps <- read.table (file="/Users/snow4/Desktop/MUMmer/Sfa_ABas_Query.fasta.snps")
-Sfa_CBas.snps <- read.table (file="/Users/snow4/Desktop/MUMmer/Sfa_CBas_Query.fasta.snps")
+Sfa_ABas.snps <- read.table (file="/Users/snow4/Desktop/ATP6/Sfa_ABas_Query.fasta.snps")
+Sfa_CBas.snps <- read.table (file="/Users/snow4/Desktop/ATP6/Sfa_CBas_Query.fasta.snps")
+Sfa_Bas.snps <- read.table (file="/Users/snow4/Desktop/ATP6/Sfa_Bas_Query.fasta.snps")
 
-Sfa_Bas.snps <- read.table (file="/Users/snow4/Desktop/MUMmer/Sfa_Bas_Query.fasta.snps")
+Ref_Anno <- readGenBank (file="/Users/snow4/Desktop/ATP6/ATP6.gb")
+
+RefDb <- makeTxDbFromGenBank (Ref_Anno)
 
 #Change column names to better represent data/incorporate metadata
 #https://mummer.sourceforge.net/manual/#snps review output format for more info
@@ -105,7 +109,7 @@ Unique.ABas <- data.frame (setdiff (ABas$value, CBas$value))
 Unique.CBas <- data.frame (setdiff (CBas$value, ABas$value))
 
 
-
+tx <- transcripts(RefDb, columns = "gene_id")
 
 
 
