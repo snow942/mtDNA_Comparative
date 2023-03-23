@@ -12,23 +12,23 @@ The data collected data was sequenced using a lcwgs technique. The low-coverage 
 
 # Steps for mitogenmoic comparative analysis:
 
-1. (MUMmerQuery)[MUMmerQuery.sh]
+1. [MUMmerQuery.sh](MUMmerQuery)
 		
-	* (Nucmer_mtDNA)[Nucmer_mtDNA.sh]
-	The *.m files are to be used
+1. [Nucmer_mtDNA.sh](Nucmer_mtDNA)
+	* The *.m files are to be used
 		
 1. delta2vcf
 	* To be included in Nucmer_mtDNA bashscript
 		
-1. (SNPs2Counts.R)[SNPs2Counts.R]
+1. [SNPs2Counts.R](SNPs2Counts.R)
 		
-1. (mtDNAFilter.R)[mtDNAFilter.R]
+1. [mtDNAFilter.R](mtDNAFilter.R)
 		
 1. (SnpEff & SnpSift)[]
 		
-1. (Plink)[Plink.sh]
+1. [Plink.sh](Plink)
 		
-1. (DiversityStats.R)[DiversityStats.R]
+1. [DiversityStats.R](DiversityStats.R)
 
 
 # Steps for phylogenetic verification
