@@ -20,14 +20,12 @@ The data collected data was sequenced using a lcwgs technique. The low-coverage 
 1. [Nucmer_mtDNA.sh](Nucmer_mtDNA)
 	* The *.m files are to be used
 		
-1. delta2vcf
-	* To be included in Nucmer_mtDNA bashscript
-		
 1. [SNPs2Counts.R](SNPs2Counts.R)
 		
 1. [mtDNAFilter.R](mtDNAFilter.R)
 		
-1. (SnpEff & SnpSift)[]
+1. [snpEff.sh](SnpEff)
+1. [snpSift.sh](SnpSift)
 		
 1. [Plink.sh](Plink)
 		
