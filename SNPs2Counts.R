@@ -22,8 +22,8 @@ colnames (Sfa_ABas.snps) <- c ("P1",
                                "FRM2",
                                "mtDNA_Rep",
                                "SampleName")
-ABas.vcf <- read.vcfR ("/Users/snow4/Desktop/Mummerv4/Sfa_ABas_Query.fasta.m.vcf")
-ABas.names <- read.table ("ABas_names.txt")
+ABas.vcf <- read.vcfR ("/Users/snow4/Desktop/Mummerv4/ABas.m.Filter.vcf")
+ABas.names <- read.table ("Sfa_ABas_Query.fasta.txt")
 
 Sfa_CBas.snps <- read.table (file="/Users/snow4/Desktop/Mummerv4/Sfa_CBas_Query.fasta.m.snps")
 colnames (Sfa_CBas.snps) <- c ("P1",
@@ -40,8 +40,8 @@ colnames (Sfa_CBas.snps) <- c ("P1",
                                "FRM2",
                                "mtDNA_Rep",
                                "SampleName")
-CBas.vcf <- read.vcfR ("/Users/snow4/Desktop/Mummerv4/Sfa_CBas_Query.fasta.m.vcf")
-CBas.names <- read.table ("CBas_names.txt")
+CBas.vcf <- read.vcfR ("/Users/snow4/Desktop/Mummerv4/CBas.m.Filter.vcf")
+CBas.names <- read.table ("Sfa_CBas_Query.fasta.txt")
 
 Sfa_Bas.snps <- read.table (file="/Users/snow4/Desktop/Mummerv4/Sfa_Bas_Query.fasta.m.snps")
 colnames (Sfa_Bas.snps) <- c ("P1",
@@ -59,7 +59,7 @@ colnames (Sfa_Bas.snps) <- c ("P1",
                                "mtDNA_Rep",
                                "SampleName")
 Bas.vcf <- read.vcfR ("/Users/snow4/Desktop/Mummerv4/Sfa_Bas_Query.fasta.m.vcf")
-Bas.names <- read.table ("Bas_names.txt")
+Bas.names <- read.table ("Sfa_Bas_Query.fasta.txt")
 
 #Merge snps to counts
 SNPs2Counts <- function (SNPsFile, NamesFile, VcfFile) {

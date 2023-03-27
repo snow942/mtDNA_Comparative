@@ -70,7 +70,7 @@ colnames (Sfa_Bas.snps) <- c ("P1",
 
 FilterVariants <- function (SnpsInput, FilterPercent) {
 #Used to filter variants in .snps files based on read depth
-  SnpsInput <- Sfa_ABas.snps
+  #SnpsInput <- Sfa_ABas.snps
   #Determines number of total samples to implement a filter based on 90% of sample population
   SampleCounts.df <- data.frame (table (SnpsInput$SampleName))
   TotalSamples <- nrow (SampleCounts.df)
@@ -115,7 +115,7 @@ Unique.CBas <- as_tibble (setdiff (CBas$POS, ABas$POS))
 
 library ("vcfR")
 
-ABas.vcf <- read.vcfR ("/Users/snow4/Desktop/Mummerv4/Sfa_ABas_Query.fasta.1.vcf")
+ABas.vcf <- read.vcfR ("/Users/snow4/Desktop/Mummerv4/Sfa_ABas_Query.fasta.m.vcf")
 CBas.vcf <- read.vcfR ("/Users/snow4/Desktop/Mummerv4/Sfa_CBas_Query.fasta.m.vcf")
 
 ReadDepth <- function (vcf, Filtered.df) {
