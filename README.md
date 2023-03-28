@@ -36,6 +36,9 @@ The data collected data was sequenced using a lcwgs technique. The low-coverage 
 
 1. MEGA...MUSCLE...
 
+	*OR*
+
+1. MitoPhAST
 
 # Versions
 
