@@ -18,7 +18,7 @@ The data collected data was sequenced using a lcwgs technique. The low-coverage 
 1. [MUMmerQuery.sh](MUMmerQuery)
 		
 1. [Nucmer_mtDNA.sh](Nucmer_mtDNA)
-	* The *.m files are to be used
+	* The *m-to-m* files are to be used
 		
 1. [SNPs2Counts.R](SNPs2Counts.R)
 		
