@@ -12,26 +12,26 @@ The data collected data was sequenced using a lcwgs technique. The low-coverage 
 ### ABas - USS Albatross Samples
 ### CBas - Contemporary Samples
 ### Bas - Combination of ABas and CBas Samples
-### [Sfa_mtDNA_Ref.fasta](Sfa_mtDNA) - Salarias fasciatus Mitochondrion Reference
+### [Sfa_mtDNA](Sfa_mtDNA_Ref.fasta) - Salarias fasciatus Mitochondrion Reference
 
 # Steps for mitogenmoic comparative analysis:
 
-1. [MUMmerQuery.sh](MUMmerQuery)
+1. [MUMmerQuery](MUMmerQuery.sh)
 	* Creates a multifasta files containing the samples of interest 
-1. [Nucmer_mtDNA.sh](Nucmer_mtDNA)
+1. [Nucmer_mtDNA](Nucmer_mtDNA.sh)
 	* Performs Nucmer on all fasta files using Sfa_mtDNA as a reference
 	<!-- The *m-to-m* files are to be used --!>
 1. [SNPs2Counts.R](SNPs2Counts.R)
 	* Transforms Nucmer SNPs to counts in vcf file format	
 1. [mtDNAFilter.R](mtDNAFilter.R)
 	* Applies filter to the vcf formatted SNP data
-1. [snpEff.sh](SnpEff)
+1. [SnpEff](snpEff.sh)
 	* Annotation from gff3 to vcf
 	1. [Assemblytics.sh](Assemblytics)
 		* Calls structural variants
-1. [snpSift.sh](SnpSift)
+1. [SnpSift](snpSift.sh)
 	* Performs Hardy-Weinberg equilibrium and calls TsTv information
-1. [Plink.sh](Plink)
+1. [Plink](Plink.sh)
 	* Creates eigenvec and eigenval files for diversity statistics
 1. [DiversityStats.R](DiversityStats.R)
 	* Calculation of diversity statistics (Fst)
