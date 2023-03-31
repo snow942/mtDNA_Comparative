@@ -19,15 +19,11 @@ conda deactivate
 
 conda activate Mummerv4
 
-#Documentation of version
-plink --version
-
 #Creation of a list of the sample fastq to be used for while-loop
 cd /scratch/rsnow/Mummerv4/
 
+SnpSift hwe Bas.Anno.vcf > Bas.Anno.hwe.vcf
 
-plink --vcf /scratch/rsnow/Mummerv4/Bas.Anno.hwe.vcf --make-bed -chr-set 1 no-xy --allow-extra-chr --out Bas_plink
-
-plink --bfile Bas_plink --pca --chr-set 1 no-xy --allow-extra-chr --out Bas_plink
+SnpSift TsTv Bas.Anno.vcf > Bas.TsTv.txt
 
 exit

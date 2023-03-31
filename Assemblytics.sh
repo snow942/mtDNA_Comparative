@@ -17,17 +17,13 @@ module load anaconda
 conda deactivate
 conda deactivate
 
-conda activate Mummerv4
+conda activate Assemblytics
 
-#Documentation of version
-plink --version
-
-#Creation of a list of the sample fastq to be used for while-loop
+#
 cd /scratch/rsnow/Mummerv4/
 
-
-plink --vcf /scratch/rsnow/Mummerv4/Bas.Anno.hwe.vcf --make-bed -chr-set 1 no-xy --allow-extra-chr --out Bas_plink
-
-plink --bfile Bas_plink --pca --chr-set 1 no-xy --allow-extra-chr --out Bas_plink
+Assemblytics Sfa_ABas_Query.fasta.m.delta ABas.Assemblytics 1000 2 1000
+Assemblytics Sfa_CBas_Query.fasta.m.delta CBas.Assemblytics 1000 2 1000
+Assemblytics Sfa_Bas_Query.fasta.m.delta Bas.Assemblytics 1000 2 1000
 
 exit

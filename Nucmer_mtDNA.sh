@@ -6,7 +6,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --exclusive=user
 
-#SBATCH --output=/home/rsnow/BashScripts/SlurmOutput/MUM.%j.err  # STDOUT output file
+#SBATCH --output=/home/rsnow/BashScripts/SlurmOutput/MUM.%j.out  # STDOUT output file
 #SBATCH --error=/home/rsnow/BashScripts/SlurmOutput/MUM.%j.err   # STDERR output file
 
 #Load Modules
@@ -17,7 +17,7 @@ module load anaconda
 conda deactivate
 conda deactivate
 
-conda activate Mummer4
+conda activate Mummerv4
 
 #Documentation of version
 nucmer --version
@@ -31,16 +31,11 @@ do
 
 	nucmer --prefix="$mfafile" /home/rsnow/mtDNARef/Sfa_mtDNA_Ref.fasta "$mfafile"
 
-	delta-filter -1 "$mfafile".delta | delta2vcf > "$mfafile".1.vcf
-	delta-filter -m "$mfafile".delta | delta2vcf > "$mfafile".m.vcf
+	delta-filter -q -m "$mfafile".delta | delta2vcf > "$mfafile".m.vcf
 
-	delta-filter -1 "$mfafile".delta > "$mfafile".1.delta
-	delta-filter -m "$mfafile".delta > "$mfafile".m.delta
-
-	show-snps -HlrT "$mfafile".1.delta > "$mfafile".1.snps
+	delta-filter -q -m "$mfafile".delta > "$mfafile".m.delta
 	show-snps -HlrT "$mfafile".m.delta > "$mfafile".m.snps
 
-	show-diff -q "$mfafile".1.delta > "$mfafile".1.report
 	show-diff -q "$mfafile".m.delta > "$mfafile".m.report
 
 done
