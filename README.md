@@ -25,8 +25,9 @@ The data collected data was sequenced using a lcwgs technique. The low-coverage 
 1. [mtDNAFilter.R](mtDNAFilter.R)
 		
 1. [snpEff.sh](SnpEff)
+	1. [Assemblytics.sh](Assemblytics)
 1. [snpSift.sh](SnpSift)
-		
+
 1. [Plink.sh](Plink)
 		
 1. [DiversityStats.R](DiversityStats.R)
@@ -36,9 +37,6 @@ The data collected data was sequenced using a lcwgs technique. The low-coverage 
 
 1. MEGA...MUSCLE...
 
-	*OR*
-
-1. MitoPhAST
 
 # Versions
 
