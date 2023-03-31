@@ -75,9 +75,25 @@ setPop (Bas.genind) <- ~Pop
 
 Bas.Fst <- pairwise.WCfst(Bas.genind)
 Bas.Fst
+write.csv (Bas.Fst, file = "Bas.Fst.csv")
 
 Bas.Stats <- basic.stats (Bas.genind, diploid = FALSE)
 Bas.Stats
+
+#AMOVA
+
+Bas.dist <- dist (Bas.genind)
+Bas.stra <- strata (Bas.genind)
+Bas.AMOVA <- pegas::amova (Bas.dist ~ Pop, data = Bas.stra)
+
+Bas.AMOVA
+
+#Tajima
+
+Bas.DNABin <- vcfR2DNAbin (x = Bas.Anno.vcf)
+Bas.Taj <- tajima.test(x = Bas.DNABin)
+Bas.Taj
+
 #Bas.Hs <- Hs (Bas.genind)
 #Bas.Hs
 
@@ -90,6 +106,7 @@ Bas.Stats
 #stats <- c("Hs", "Ht", "Gst", "Gprime_st", "D", "D")
 #Bas.glob <- data.frame (Statistic = stats, value = Bas.diff$global)
 #Bas.glob
+
 
 #Principal component(s) matched with assoc. sample ID in a tibble
 #Created for Fst
@@ -113,7 +130,7 @@ PCA_Col_Comb <- function (Sample_Col_Input, PCA_Col_input, header="PC", max_lim,
     }
     #If sample PC is bewteen defined limits place into group3
   }
-  print (min_lim)
+  #print (min_lim)
   PCA_Col_Out = PCA_Col_Out[-1,]
   Pop.PCA <- Pop.PCA %>% add_column (PCA_Col_Out$value)
   colnames (Pop.PCA) <- c ("Indv", header)
@@ -129,6 +146,7 @@ strata (Bas.genind) <- Bas.Pop.PCA1
 setPop (Bas.genind) <- ~PC1
 Bas.PC1.Fst <- pairwise.WCfst(Bas.genind)
 Bas.PC1.Fst
+write.csv (Bas.PC1.Fst, file = "Bas.PC1.Fst.csv")
 
 #PC2
 Bas.Pop.PCA2 <- PCA_Col_Comb (Sample_Col_Input = Bas.PCA$Ind, PCA_Col_input = Bas.PCA$PC2, 
@@ -139,16 +157,4 @@ setPop (Bas.genind) <- ~PC2
 Bas.PC2.Fst <- pairwise.WCfst(Bas.genind)
 Bas.PC2.Fst
 
-#AMOVA
 
-Bas.dist <- dist (Bas.genind)
-Bas.stra <- strata (Bas.genind)
-Bas.AMOVA <- pegas::amova (Bas.dist ~ Pop, data = Bas.stra)
-
-Bas.AMOVA
-
-#Tajima
-
-Bas.DNABin <- vcfR2DNAbin (x = Bas.Anno.vcf)
-Bas.Taj <- tajima.test(x = Bas.DNABin)
-Bas.Taj
