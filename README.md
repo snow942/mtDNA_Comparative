@@ -14,7 +14,7 @@ The data collected data was sequenced using a lcwgs technique. The low-coverage 
 ### Bas - Combination of ABas and CBas Samples
 ### [Sfa_mtDNA](Sfa_mtDNA_Ref.fasta) - Salarias fasciatus Mitochondrion Reference
 
-# Steps for mitogenmoic comparative analysis:
+# Steps for mitogenomic comparative analysis:
 
 1. [MUMmerQuery](MUMmerQuery.sh)
 	* Creates a multifasta files containing the samples of interest 
